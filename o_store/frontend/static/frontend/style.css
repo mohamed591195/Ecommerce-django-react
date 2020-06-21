@@ -3,9 +3,10 @@
 }
 
 .categories-aside {
-    width: 20%;
+    width: 250px;
     float: left;
     padding: 0.5em;
+    height: 100%;
 }
 
 .categories-aside ul {
@@ -15,9 +16,37 @@
     width: 100%;
 }
 
-.categories-aside ul li {
-    padding: 10px 0;
-    background-color: aquamarine;
-    margin: 4px 0;
+.categories-aside ul li a {
+    padding: 10px 10px;
+    width: 100%;
+    display: inline-block;
+    border: 1px solid rgb(90, 157, 219) ;
+    margin: 4px 10px;
     border-radius: 10px;
+    text-decoration: none;
+}
+
+.categories-aside ul li a:hover {
+    color: white;
+    background-color: rgb(90, 157, 219);
+}
+
+.products {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.product {
+    margin: 10px ;
+}
+
+.image-container {
+    height: 150px;
+    overflow: hidden;
+}
+
+.card-img-top {
+    max-width: 18rem;
+    height: auto;
 }

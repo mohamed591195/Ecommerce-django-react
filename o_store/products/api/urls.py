@@ -3,6 +3,7 @@ from . import views
 
 urlpatterns = [
     path('api/', include([
-        path('categories/', views.ListCategories.as_view())
+        path('', views.ListProducts.as_view()),
+        path('categories/', views.ListCategories.as_view()),
     ])),
 ]
