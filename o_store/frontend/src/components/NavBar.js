@@ -1,5 +1,6 @@
 import React from 'react';
-import PropTypes from 'proptypes';
+import { connect } from 'react-redux';
+import { getSearchResult } from '../actions/creators';
 
 class NavBar extends React.Component {
 
@@ -20,6 +21,7 @@ class NavBar extends React.Component {
     onSubmit(e) {
         e.preventDefault();
         console.log(this.state.query)
+        this.props.getSearchResult(this.state.query)
     }
 
     render() {
@@ -39,4 +41,4 @@ class NavBar extends React.Component {
     }
 }
 
-export default NavBar;
+export default connect(null, { getSearchResult })(NavBar);

@@ -5,7 +5,7 @@
 .categories-aside {
     width: 250px;
     float: left;
-    padding: 0.5em;
+    padding: 2em 0.5em;
     height: 100%;
 }
 
@@ -24,6 +24,7 @@
     margin: 4px 10px;
     border-radius: 10px;
     text-decoration: none;
+    cursor: pointer;
 }
 
 .categories-aside ul li a:hover {
@@ -31,14 +32,8 @@
     background-color: rgb(90, 157, 219);
 }
 
-.products {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
-.product {
-    margin: 10px ;
+.row {
+    max-width: 100%;
 }
 
 .image-container {
@@ -46,7 +41,12 @@
     overflow: hidden;
 }
 
-.card-img-top {
-    max-width: 18rem;
-    height: auto;
+.infinite-scroll-component {
+    padding: 2em 0.5em;
 }
+
+/* .card-img-top {
+    width: auto;
+    max-height: 5rem;
+    
+} */
