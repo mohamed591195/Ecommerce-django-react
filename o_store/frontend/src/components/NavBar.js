@@ -20,14 +20,13 @@ class NavBar extends React.Component {
 
     onSubmit(e) {
         e.preventDefault();
-        console.log(this.state.query)
         this.props.getSearchResult(this.state.query)
     }
 
     render() {
         return (
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                <a className="navbar-brand" href="#">Navbar</a>
+                <a className="navbar-brand" href="#">Electronics Store</a>
 
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
 
@@ -36,6 +35,11 @@ class NavBar extends React.Component {
                         <button className="btn btn-outline-info my-2 my-sm-0" type="submit">Search</button>
                     </form>
                 </div>
+                <ul className="nav justify-content-end">
+                    <li className="nav-item">
+                        <a className="nav-link" href="#">Cart</a>
+                    </li>
+                </ul>
             </nav>
         );
     }

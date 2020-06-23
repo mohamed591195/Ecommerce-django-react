@@ -1,4 +1,4 @@
-from rest_framework.generics import ListAPIView
+from rest_framework.generics import ListAPIView, RetrieveAPIView
 from .serializers import CategorySerializer, ProductSerializer
 from rest_framework.pagination import PageNumberPagination
 from products.models import Category, Product
@@ -42,3 +42,9 @@ class ListProducts(ListAPIView):
                 )
 
         return Product.objects.all()
+
+
+class DetailProduct(RetrieveAPIView):
+    serializer_class = ProductSerializer
+    lookup_field = 'slug'
+    queryset = Product.objects.all()
