@@ -32,7 +32,10 @@ class ProductList extends React.Component {
     }
 }
 
-const mapStateToPros = ({ products }) => ({ products: products.results, next: products.next });
+const mapStateToPros = ({ products }) => ({
+    products: products.results,
+    next: products.next,
+});
 
 export default connect(
     mapStateToPros,

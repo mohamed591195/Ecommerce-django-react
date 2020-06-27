@@ -3,7 +3,8 @@ import {
     GET_ALL_PRODUCTS,
     GET_NEXT_PRODUCTS,
     GET_CATEGORY_PRODUCTS,
-    GET_SEARCH_RESULT
+    SET_SEARCH_QUERY,
+    GET_PRODUCT_DETAIL
 } from './types';
 
 import axios from 'axios';
@@ -15,8 +16,9 @@ export const getCategories = () => dispatch => {
         .catch(err => console.log(err))
 }
 
-export const getAllProducts = () => dispatch => {
-    axios.get('/api/products')
+export const getAllProducts = () => (dispatch, getState) => {
+    let query = getState().products.query;
+    axios.get(`/api/products/?query=${query || ''}`)
         .then(res => dispatch({ type: GET_ALL_PRODUCTS, payload: res.data }))
         .catch(err => console.log(err))
 }
@@ -33,8 +35,15 @@ export const getNextProducts = (next_link) => dispatch => {
         .catch(err => console.log(err))
 }
 
-export const getSearchResult = (query) => dispatch => {
-    axios.get(`api/products/?query=${query}`)
-        .then(res => dispatch({ type: GET_SEARCH_RESULT, payload: res.data }))
+export const setSearchQuery = (query) => {
+    // axios.get(`api/products/?query=${query}`)
+    //     .then(res => dispatch({ type: GET_SEARCH_RESULT, payload: res.data }))
+    //     .catch(err => console.log(err))
+    return { type: SET_SEARCH_QUERY, payload: query }
+}
+
+export const getProductDetail = (slug) => dispatch => {
+    axios.get(`api/product/${slug}`)
+        .then(res => dispatch({ type: GET_PRODUCT_DETAIL, payload: res.data }))
         .catch(err => console.log(err))
 }

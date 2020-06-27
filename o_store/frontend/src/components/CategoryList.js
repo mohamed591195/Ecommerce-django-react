@@ -16,7 +16,7 @@ class CategoryList extends React.Component {
                 <ul>
                     <li key={0}>
                         <Link to="/" onClick={getAllProducts} >
-                            <em>All</em>
+                            All
                         </Link>
                     </li>
 
@@ -24,11 +24,8 @@ class CategoryList extends React.Component {
                         ?
                         categories.map(c =>
                             <li key={c.id}>
-                                <Link
-                                    to={"/" + c.slug}
-                                // onClick={() => getCategoryProducts(c.slug)}
-                                >
-                                    {c.name} <em>{c.num_products} items</em>
+                                <Link to={"/" + c.slug}>
+                                    {c.name} ({c.num_products})
                                 </Link>
                             </li>
                         )

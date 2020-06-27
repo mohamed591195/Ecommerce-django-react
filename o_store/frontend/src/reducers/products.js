@@ -2,13 +2,16 @@ import {
     GET_ALL_PRODUCTS,
     GET_NEXT_PRODUCTS,
     GET_CATEGORY_PRODUCTS,
-    GET_SEARCH_RESULT,
+    SET_SEARCH_QUERY,
+    GET_PRODUCT_DETAIL,
 } from '../actions/types';
 
 const initialState = {
     results: [],
     next: null,
     previous: null,
+    currentProduct: null,
+    query: null
 }
 
 export default function (state = initialState, { type, payload }) {
@@ -26,8 +29,17 @@ export default function (state = initialState, { type, payload }) {
         case GET_CATEGORY_PRODUCTS:
             return payload;
 
-        case GET_SEARCH_RESULT:
-            return payload;
+        case SET_SEARCH_QUERY:
+            return {
+                ...state,
+                query: payload
+            };
+
+        case GET_PRODUCT_DETAIL:
+            return {
+                ...state,
+                currentProduct: payload
+            }
 
         default:
             return state;

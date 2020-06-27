@@ -1,13 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getSearchResult } from '../actions/creators';
+import { setSearchQuery, getAllProducts } from '../actions/creators';
+import { Redirect, withRouter } from 'react-router-dom';
+
 
 class NavBar extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            query: ''
+            query: '',
+            redirect: false
         }
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
@@ -20,7 +23,10 @@ class NavBar extends React.Component {
 
     onSubmit(e) {
         e.preventDefault();
-        this.props.getSearchResult(this.state.query)
+        const { setSearchQuery, getAllProducts, location, history } = this.props;
+
+        setSearchQuery(this.state.query);
+        (location.pathname !== '/') ? history.push('/') : getAllProducts()
     }
 
     render() {
@@ -45,4 +51,9 @@ class NavBar extends React.Component {
     }
 }
 
-export default connect(null, { getSearchResult })(NavBar);
+const mapDispatchToProps = (dispatch) => ({
+    setSearchQuery: query => dispatch(setSearchQuery(query)),
+    getAllProducts: () => { dispatch(getAllProducts()) }
+})
+
+export default connect(null, mapDispatchToProps)(withRouter(NavBar));
