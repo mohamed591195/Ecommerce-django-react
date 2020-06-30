@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { setSearchQuery, getAllProducts } from '../actions/creators';
-import { Redirect, withRouter } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
 
 class NavBar extends React.Component {
@@ -30,6 +30,9 @@ class NavBar extends React.Component {
     }
 
     render() {
+        const { cart } = this.props;
+        const cartLength = Object.keys(cart).length
+
         return (
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
                 <a className="navbar-brand" href="#">Electronics Store</a>
@@ -43,7 +46,9 @@ class NavBar extends React.Component {
                 </div>
                 <ul className="nav justify-content-end">
                     <li className="nav-item">
-                        <a className="nav-link" href="#">Cart</a>
+                        <Link className="nav-link" to="/cart/detail">
+                            {cartLength || 'NO'} item{cartLength === 1 ? '' : 's'} in cart
+                        </Link>
                     </li>
                 </ul>
             </nav>
@@ -51,9 +56,11 @@ class NavBar extends React.Component {
     }
 }
 
+const mapStateToProps = ({ baseCart }) => ({ cart: baseCart });
+
 const mapDispatchToProps = (dispatch) => ({
     setSearchQuery: query => dispatch(setSearchQuery(query)),
-    getAllProducts: () => { dispatch(getAllProducts()) }
+    getAllProducts: () => dispatch(getAllProducts())
 })
 
-export default connect(null, mapDispatchToProps)(withRouter(NavBar));
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(NavBar));

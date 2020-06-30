@@ -5,6 +5,7 @@ from products.models import Category, Product
 from rest_framework.decorators import api_view
 from django.db.models import Q
 from rest_framework.response import Response
+import json
 
 
 class ListCategories(ListAPIView):
@@ -41,6 +42,17 @@ class ListProducts(ListAPIView):
                     Q(category__name__icontains=query)
                 )
 
+        return Product.objects.all()
+
+
+class ListProductsByIds(ListAPIView):
+    serializer_class = ProductSerializer
+
+    def get_queryset(self):
+        product_ids = self.request.GET.get('product_ids')
+        if product_ids:
+            product_ids = json.loads(product_ids)
+            return Product.objects.filter(id__in=product_ids)
         return Product.objects.all()
 
 

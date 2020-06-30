@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'proptypes';
 import { Link } from 'react-router-dom';
-import { getCategories, getAllProducts, getCategoryProducts } from '../actions/creators';
+import { getCategories, getAllProducts } from '../actions/creators';
 import { connect } from 'react-redux';
 
 class CategoryList extends React.Component {
@@ -10,7 +10,7 @@ class CategoryList extends React.Component {
     }
 
     render() {
-        const { categories, getAllProducts, getCategoryProducts } = this.props;
+        const { categories, getAllProducts } = this.props;
         return (
             <aside className="categories-aside">
                 <ul>
@@ -44,7 +44,6 @@ export default connect(
     mapStateToProps,
     {
         getCategories,
-        getCategoryProducts,
         getAllProducts
     }
 )(CategoryList);
