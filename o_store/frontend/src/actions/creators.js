@@ -8,6 +8,7 @@ import {
     ADD_PRODUCT_TO_CART,
     REMOVE_PRODUCT_FROM_CART,
     FILL_CART,
+    UPDATE_CART_PRODUCT_QUANTITY
 } from './types';
 
 import axios from 'axios';
@@ -52,12 +53,12 @@ export const getProductDetail = (slug) => dispatch => {
 
 
 // CART CREATORS
-export const addProductToCart = (product, number) =>
-    ({ type: ADD_PRODUCT_TO_CART, payload: [product, number] })
+export const addProductToCart = (productId) =>
+    ({ type: ADD_PRODUCT_TO_CART, payload: productId })
 
 export const removeProductFromCart = productId => dispatch => {
-    dispatch({ type: REMOVE_PRODUCT_FROM_CART, payload: productId })
-    dispatch(fillCartFromDB())
+    dispatch({ type: REMOVE_PRODUCT_FROM_CART, payload: productId });
+    dispatch(fillCartFromDB());
 }
 
 
@@ -73,7 +74,7 @@ export const fillCartFromDB = () => (dispatch, getState) => {
                 id: p.id,
                 name: p.name,
                 price: p.price,
-                number: baseCart[`${p.id}`],
+                quantity: baseCart[`${p.id}`],
                 inventory: p.inventory,
                 totalPrice: p.price * baseCart[`${p.id}`],
                 image: p.images[0],
@@ -89,4 +90,9 @@ export const fillCartFromDB = () => (dispatch, getState) => {
 
         })
         .catch(err => console.log(err))
-}   
+}
+
+export const updateCartProductQuantity = (productId, quantity) => dispatch => {
+    dispatch({ type: UPDATE_CART_PRODUCT_QUANTITY, payload: [productId, quantity] });
+    dispatch(fillCartFromDB());
+}

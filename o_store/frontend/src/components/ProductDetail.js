@@ -13,7 +13,8 @@ class ProductDetail extends React.Component {
     }
 
     render() {
-        const { product, addProductToCart, removeProductFromCart, history } = this.props;
+        const { product, addProductToCart, history, cart } = this.props;
+
         return (
             (!product)
                 ? <h1>Loading...</h1>
@@ -50,7 +51,26 @@ class ProductDetail extends React.Component {
 
                             <p><span>Description: </span> <br />{product.description}</p>
                             <p><span>Price:</span> ${product.price}</p>
-                            <button onClick={() => { addProductToCart(product.id, 1); history.push('/cart/detail') }} type="button" className="btn btn-primary">Add to cart</button>
+                            {
+                                Object.keys(cart).includes(String(product.id))
+                                    ?
+                                    <button
+                                        onClick={() => { history.push('/cart/detail') }}
+                                        type="button"
+                                        className="btn btn-success"
+                                    >
+                                        In the cart
+                                    </button>
+                                    :
+                                    <button
+                                        onClick={() => { addProductToCart(product.id); history.push('/cart/detail') }}
+                                        type="button"
+                                        className="btn btn-primary"
+                                    >
+                                        Add to cart
+                                    </button>
+                            }
+
                         </div>
                     </div>
                 )
@@ -61,12 +81,12 @@ class ProductDetail extends React.Component {
 
 
 
-const mapStateToProps = ({ products }) => ({ product: products.currentProduct });
+const mapStateToProps = ({ products, baseCart }) => ({ product: products.currentProduct, cart: baseCart });
 
 const mapDispatchToProps = (dispatch) => ({
 
     getProductDetail: (slug) => dispatch(getProductDetail(slug)),
-    addProductToCart: (productId, number) => dispatch(addProductToCart(productId, number)),
+    addProductToCart: (productId) => dispatch(addProductToCart(productId)),
     removeProductFromCart: productId => dispatch(removeProductFromCart(productId))
 });
 

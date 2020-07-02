@@ -26,6 +26,11 @@ class NavBar extends React.Component {
         const { setSearchQuery, getAllProducts, location, history } = this.props;
 
         setSearchQuery(this.state.query);
+
+        // if this the home page then calling get all products will load product 
+        // according to the query in the state
+        // else redirection to the home will make the same effect
+
         (location.pathname !== '/') ? history.push('/') : getAllProducts()
     }
 
@@ -47,7 +52,7 @@ class NavBar extends React.Component {
                 <ul className="nav justify-content-end">
                     <li className="nav-item">
                         <Link className="nav-link" to="/cart/detail">
-                            {cartLength || 'NO'} item{cartLength === 1 ? '' : 's'} in cart
+                            <span style={{ color: 'black' }}>Your Cart:</span> {cartLength || 'NO'} item{cartLength === 1 ? '' : 's'}
                         </Link>
                     </li>
                 </ul>

@@ -1,6 +1,7 @@
 import {
     ADD_PRODUCT_TO_CART,
     REMOVE_PRODUCT_FROM_CART,
+    UPDATE_CART_PRODUCT_QUANTITY
 } from '../actions/types';
 
 
@@ -19,7 +20,7 @@ export default function (state = initialState, { type, payload }) {
 
         case ADD_PRODUCT_TO_CART:
 
-            const [productId] = payload;
+            const productId = payload;
 
             newState = {
                 ...state,
@@ -39,6 +40,19 @@ export default function (state = initialState, { type, payload }) {
             presistCart(newState)
 
             return newState
+
+        case UPDATE_CART_PRODUCT_QUANTITY:
+
+            const [id, quantity] = payload;
+
+            newState = {
+                ...state,
+                [id]: parseInt(quantity),
+            }
+
+            presistCart(newState);
+
+            return newState;
 
         default:
             return state

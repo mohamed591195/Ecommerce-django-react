@@ -5,7 +5,7 @@ import NavBar from './components/NavBar';
 import CategoryList from './components/CategoryList';
 import ProductListContainer from './components/ProductListContainer';
 import ProductDetail from './components/ProductDetail';
-import Cart from './components/Cart';
+import CartContainer from './components/CartContainer';
 
 import { Provider } from 'react-redux';
 import { applyMiddleware, createStore } from 'redux';
@@ -25,7 +25,7 @@ const App = () => {
             <Route exact path={['/', '/:slug']} component={CategoryList} />
             <ProductListContainer />
             <Route path='/product/:slug' component={ProductDetail} />
-            <Route path='/cart/detail' component={Cart} />
+            <Route path='/cart/detail' component={CartContainer} />
         </HashRouter>
     </Provider>);
 };
