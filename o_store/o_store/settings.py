@@ -40,8 +40,11 @@ INSTALLED_APPS = [
     # own
     'frontend',
     'products',
+    'users',
     # third party
-    'rest_framework'
+    'rest_framework',
+    'knox',
+
 ]
 
 MIDDLEWARE = [
@@ -118,6 +121,7 @@ USE_L10N = True
 
 USE_TZ = True
 
+AUTH_USER_MODEL = 'users.user'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
@@ -125,3 +129,11 @@ USE_TZ = True
 STATIC_URL = '/static/'
 MEDIA_URL = 'media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'knox.auth.TokenAuthentication',
+        # 'rest_framework.authentication.BasicAuthentication',
+        # 'rest_framework.authentication.SessionAuthentication'
+    ]
+}
