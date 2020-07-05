@@ -31,7 +31,7 @@ class ProductDetail extends React.Component {
                                     )
                                     :
                                     <div className={`carousel-item active`}>
-                                        <img src={product.images[0] || "media/products/no-image.png"} className="d-block w-100" alt="..." />
+                                        <img src={product.images[0] || "/media/products/no-image.png"} className="d-block w-100" alt="..." />
                                     </div>
                                 }
 

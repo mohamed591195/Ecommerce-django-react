@@ -25,7 +25,7 @@ const Cart = ({ products, totalPrice, removeProductFromCart, quantityInput }) =>
                             products.map((p, i) => (
                                 <tr key={p.id}>
                                     <th scope="row">{i + 1}</th>
-                                    <td><img src={p.image || "media/products/no-image.png"} /></td>
+                                    <td><img src={p.image || "/media/products/no-image.png"} /></td>
                                     <td>{p.name}</td>
                                     {quantityInput(p)}
                                     <td>

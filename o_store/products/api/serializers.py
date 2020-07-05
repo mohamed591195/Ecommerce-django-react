@@ -14,7 +14,7 @@ class CategorySerializer(serializers.ModelSerializer):
 class ProductImageURLField(serializers.RelatedField):
 
     def to_representation(self, value):
-        return value.img.url
+        return f'/{value.img.url}'
 
 
 class ProductSerializer(serializers.ModelSerializer):

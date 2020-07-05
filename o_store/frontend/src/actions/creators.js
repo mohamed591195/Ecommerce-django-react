@@ -32,7 +32,7 @@ export const getAllProducts = () => (dispatch, getState) => {
 }
 
 export const getCategoryProducts = (categorySlug) => dispatch => {
-    axios.get(`/api/products/${categorySlug}`)
+    axios.get(`/api/products/${categorySlug}/`)
         .then(res => dispatch({ type: GET_CATEGORY_PRODUCTS, payload: res.data }))
         .catch(err => console.log(err))
 }
@@ -46,7 +46,7 @@ export const getNextProducts = (next_link) => dispatch => {
 export const setSearchQuery = (query) => ({ type: SET_SEARCH_QUERY, payload: query })
 
 export const getProductDetail = (slug) => dispatch => {
-    axios.get(`api/product/${slug}`)
+    axios.get(`/api/product/${slug}/`)
         .then(res => dispatch({ type: GET_PRODUCT_DETAIL, payload: res.data }))
         .catch(err => console.log(err))
 }

@@ -3,7 +3,7 @@ import Product from './Product';
 import { connect } from 'react-redux';
 import { getAllProducts, getNextProducts, getCategoryProducts, getCategories } from '../actions/creators';
 import InfiniteScroll from 'react-infinite-scroll-component';
-
+import { withRouter } from 'react-router-dom';
 
 class ProductList extends React.Component {
 
@@ -44,4 +44,4 @@ export default connect(
         getNextProducts,
         getCategoryProducts
     }
-)(ProductList);
+)(withRouter(ProductList));

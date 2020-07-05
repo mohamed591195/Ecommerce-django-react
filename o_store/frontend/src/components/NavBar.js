@@ -51,7 +51,7 @@ class NavBar extends React.Component {
                 </div>
                 <ul className="nav justify-content-end">
                     <li className="nav-item">
-                        <Link className="nav-link" to="/cart/detail">
+                        <Link className="nav-link" to="/cart">
                             <span style={{ color: 'black' }}>Your Cart:</span> {cartLength || 'NO'} item{cartLength === 1 ? '' : 's'}
                         </Link>
                     </li>
