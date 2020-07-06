@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { setSearchQuery, getAllProducts } from '../actions/creators';
+import { setSearchQuery, getAllProducts, logout } from '../actions/creators';
 import { Link, withRouter } from 'react-router-dom';
 
 
@@ -35,7 +35,7 @@ class NavBar extends React.Component {
     }
 
     render() {
-        const { cart } = this.props;
+        const { cart, isAuthenticated, logout } = this.props;
         const cartLength = Object.keys(cart).length
 
         return (
@@ -50,6 +50,27 @@ class NavBar extends React.Component {
                     </form>
                 </div>
                 <ul className="nav justify-content-end">
+                    {(!isAuthenticated)
+                        ?
+                        <>
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/login">
+                                    Login
+                                </Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/register">
+                                    Register
+                                </Link>
+                            </li>
+                        </>
+                        :
+                        <li className="nav-item">
+                            <button onClick={logout} className="nav-link">
+                                Logout
+                            </button>
+                        </li>
+                    }
                     <li className="nav-item">
                         <Link className="nav-link" to="/cart">
                             <span style={{ color: 'black' }}>Your Cart:</span> {cartLength || 'NO'} item{cartLength === 1 ? '' : 's'}
@@ -61,11 +82,13 @@ class NavBar extends React.Component {
     }
 }
 
-const mapStateToProps = ({ baseCart }) => ({ cart: baseCart });
+const mapStateToProps = ({ baseCart, auth }) =>
+    ({ cart: baseCart, isAuthenticated: auth.isAuthenticated });
 
 const mapDispatchToProps = (dispatch) => ({
     setSearchQuery: query => dispatch(setSearchQuery(query)),
-    getAllProducts: () => dispatch(getAllProducts())
+    getAllProducts: () => dispatch(getAllProducts()),
+    logout: () => dispatch(logout())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(NavBar));

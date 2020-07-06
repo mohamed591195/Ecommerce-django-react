@@ -12,7 +12,8 @@ class UserManager(BaseUserManager):
         extra_fields.setdefault('is_staff', False)
 
         user = self.model(
-            email=self.normalize_email(email)
+            email=self.normalize_email(email),
+            **extra_fields
         )
 
         user.set_password(password)
